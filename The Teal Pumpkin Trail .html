@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halloween Stamina Sprint • Grade 6 ELA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1d2b64;--ink:#22304f;--purple:#7b3fe4;--coral:#ff6b4a;--teal:#0fa3a3;--gold:#f5b301;--green:#1fb36b;--red:#e5484d;--pink:#ff4fa3;--blue:#3d8bfd;--bg:#fff4e8;--line:#eadff5;
+ --p1:#ff4fa3;--p1l:#ffd6ea;--p2:#3d8bfd;--p2l:#d6e7ff;--p3:#1fb36b;--p3l:#cdf3df}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);background-image:radial-gradient(circle at 8% 15%,#ffe0c2 0 130px,transparent 131px),radial-gradient(circle at 92% 55%,#ece0ff 0 170px,transparent 171px),radial-gradient(#f3c9a6 1.3px,transparent 1.3px);background-size:auto,auto,20px 20px;color:var(--ink);font:18px/1.6 Nunito,system-ui,sans-serif;min-height:100vh}
+h1,h2,h3,h4,.fred{font-family:Fredoka,Nunito,sans-serif;line-height:1.2}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+header{background:linear-gradient(115deg,#1a1028,#4b1f8f 40%,#e85d04 75%,#ffb703);color:#fff;padding:20px 16px 24px}
+.hwrap{max-width:1000px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.logo{height:92px;background:#fff;border-radius:16px;padding:6px;box-shadow:0 6px 18px #0003}
+.logo-fallback{display:none;background:#fff;color:var(--navy);border-radius:16px;padding:10px 14px;font-family:Fredoka;font-weight:700;text-align:center;line-height:1.1}
+.logo-fallback small{display:block;font:600 11px Nunito;color:var(--purple)}
+.kicker{margin:0;font-weight:800;letter-spacing:.08em;font-size:13px}
+header h1{margin:2px 0;font-size:clamp(30px,6vw,46px)}
+header p{margin:0}
+.hud{position:sticky;top:0;z-index:20;background:#ffffffee;backdrop-filter:blur(6px);border-bottom:3px solid var(--line)}
+.hudin{max-width:1000px;margin:0 auto;padding:8px 16px;display:flex;gap:6px 14px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:Fredoka;font-weight:700;color:var(--purple)}
+.xpbar{flex:1 1 140px;height:16px;background:#f1e6ff;border-radius:99px;overflow:hidden}
+.xpbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff4fa3,#7b3fe4,#3d8bfd,#1fb36b);transition:width .5s}
+.xpnum{font-weight:800}.streak{font-weight:800;color:var(--coral)}
+.badges{font-size:22px;display:flex;gap:3px}.badges span{filter:grayscale(1);opacity:.3}.badges span.on{filter:none;opacity:1}
+.tbtn{background:#f1ecff;border:0;border-radius:10px;padding:6px 10px;font-size:15px;font-weight:800}
+.rate{width:66px;accent-color:var(--purple)}
+#savedBadge{font-weight:800;color:var(--green);font-size:14px}
+main{max-width:1000px;margin:0 auto;padding:16px 16px 60px}
+.start{background:#fff;border-radius:20px;padding:14px 18px;border:3px solid var(--line);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.start input{flex:1 1 220px;font:inherit;padding:10px 12px;border:3px solid #ead2f2;border-radius:12px}
+.map{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.door{border:0;border-radius:20px;padding:14px 8px;color:#fff;text-align:center;box-shadow:0 6px 0 #0002;transition:transform .15s}
+.door:hover{transform:translateY(-3px) rotate(-1deg)}
+.door .ic{font-size:34px;display:block}.door b{font-family:Fredoka;font-size:18px;display:block}.door small{font-weight:700;font-size:13px}
+.door.active{outline:4px solid var(--navy);outline-offset:3px}
+.l1{background:linear-gradient(150deg,#e85d04,#ffa94d)}.l2{background:linear-gradient(150deg,#5b2bc4,#a879ff)}.l3{background:linear-gradient(150deg,#14935a,#3fd38a)}.l4{background:linear-gradient(150deg,#2b2140,#6a32d9)}
+@media(max-width:640px){.map{grid-template-columns:repeat(2,1fr)}.logo{height:70px}}
+.lhead{border-radius:22px;padding:18px 20px;color:#fff;margin:6px 0 10px}
+.lhead h2{margin:0 0 6px;font-size:clamp(24px,4.5vw,34px)}
+.chip-std{background:#ffffff30;border:2px solid #ffffff90;border-radius:99px;padding:1px 10px;font-size:14px;font-weight:800;display:inline-block;margin:2px 4px 2px 0}
+.ican{background:#ffffff26;border-radius:14px;padding:8px 14px;margin-top:8px}.ican ul{margin:2px 0 0;padding-left:22px}
+.lprog{position:sticky;top:58px;z-index:10;background:#fff;border:3px solid var(--line);border-radius:16px;padding:8px 14px;margin:8px 0 4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-weight:800}
+.lprog .bar{flex:1 1 160px;height:14px;background:#f3eefc;border-radius:99px;overflow:hidden}
+.lprog .bar span{display:block;height:100%;background:linear-gradient(90deg,#1fb36b,#f5b301);transition:width .5s}
+.sect{font:600 24px Fredoka;margin:22px 0 4px;display:flex;align-items:center;gap:8px}
+.card,.act{background:#fff;border-radius:22px;padding:18px 20px;margin:14px 0;border:3px solid var(--line);position:relative;box-shadow:0 5px 0 #f1e5f4}
+.card h3,.act h4{margin:0 0 8px;font-size:22px;padding-right:105px}
+.act h4{margin-top:8px}
+.say{position:absolute;top:14px;right:14px;border:0;border-radius:12px;padding:6px 12px;font-weight:800;font-size:15px;background:#fff3c4;color:#5a4300}
+.speaking{box-shadow:0 0 0 4px var(--gold),0 0 24px #f5b30188}
+table{border-collapse:collapse;width:100%;font-size:16px;margin:8px 0}td,th{padding:8px 10px;border:2px solid #f0e6ef;text-align:left;vertical-align:top}th{background:#fbf2ff;font-family:Fredoka;font-weight:600}
+.passage{background:#f7fbff;border:2px dashed #9cc3e6;border-radius:14px;padding:12px 16px;margin:10px 0}
+.passage h5{font:600 18px Fredoka;margin:10px 0 2px}
+.callout{background:#fff6d6;border-left:6px solid var(--gold);border-radius:10px;padding:10px 14px;margin:10px 0}
+.pr1{background:var(--p1l);border-bottom:3px solid var(--p1);border-radius:5px;padding:0 3px;font-weight:800}
+.pr2{background:var(--p2l);border-bottom:3px solid var(--p2);border-radius:5px;padding:0 3px;font-weight:800}
+.pr3{background:var(--p3l);border-bottom:3px solid var(--p3);border-radius:5px;padding:0 3px;font-weight:800}
+.demo .dp{border-radius:5px;padding:0 2px;transition:.2s}
+.demo.s1 .d1,.demo.s2 .d2,.demo.s3 .d3{font-weight:800}
+.demo.s1 .d1{background:var(--p1l);border-bottom:3px solid var(--p1)}.demo.s2 .d2{background:var(--p2l);border-bottom:3px solid var(--p2)}.demo.s3 .d3{background:var(--p3l);border-bottom:3px solid var(--p3)}
+.toggles{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.tog{border:3px solid var(--line);background:#fff;border-radius:99px;padding:5px 14px;font-weight:800}
+.tog.on1{background:var(--p1);border-color:var(--p1);color:#fff}.tog.on2{background:var(--p2);border-color:var(--p2);color:#fff}.tog.on3{background:var(--p3);border-color:var(--p3);color:#fff}
+.lens{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.lens div{border-radius:16px;padding:12px;color:#fff}
+.lens .a{background:linear-gradient(150deg,#e8338a,#ff8cc6)}.lens .b{background:linear-gradient(150deg,#2a6fe0,#6fb0ff)}.lens .c{background:linear-gradient(150deg,#14935a,#3fd38a)}
+.lens b{font:600 20px Fredoka;display:block}
+.cam{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cam div{background:#f3f7ff;border:3px solid #cfe0ff;border-radius:16px;padding:12px}
+.cam .ic{font-size:34px}
+@media(max-width:640px){.lens,.cam{grid-template-columns:1fr}}
+/* tags */
+.tag{display:inline-block;font:700 14px Fredoka;color:#fff;border-radius:99px;padding:2px 12px;margin:0 4px 4px 0}
+.dok1{background:#1fb36b}.dok2{background:#3d8bfd}.dok3{background:#7b3fe4}.spiral{background:#ff6b4a}
+.pts{font-weight:800;font-size:14px;color:var(--purple)}
+/* mc */
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:#fdfaff;border:3px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}
+.opt .let{flex:none;width:30px;height:30px;border-radius:50%;background:var(--line);display:grid;place-items:center;font:700 16px Fredoka}
+.opt.sel{border-color:var(--purple);background:#f1eaff}.opt.sel .let{background:var(--purple);color:#fff}
+.right{border-color:var(--green)!important;background:#e6f8ef!important}.right .let{background:var(--green)!important;color:#fff}
+.wrong{border-color:var(--red)!important;background:#fdeaea!important}.wrong .let{background:var(--red)!important;color:#fff}
+.part{font:600 17px Fredoka;color:#fff;background:var(--navy);border-radius:10px;padding:2px 10px;display:inline-block;margin-top:10px}
+button:disabled{cursor:default}
+/* drag and drop */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;background:#fff7e6;border:3px dashed #f5b301;border-radius:16px;margin:8px 0}
+.pool:empty::after{content:"All placed! 🎉";font-weight:800;color:#a07400}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.bin{border:3px solid var(--line);border-radius:16px;padding:8px;min-height:110px;background:#fff;transition:.15s}
+.bin>b{display:block;font:600 17px Fredoka;color:#fff;border-radius:10px;padding:3px 8px;margin-bottom:6px;text-align:center}
+.bin.over{transform:scale(1.03);box-shadow:0 0 0 4px var(--gold)}
+.bin.tapme{box-shadow:0 0 0 3px #f5b30199}
+.drop{display:flex;flex-wrap:wrap;gap:6px}
+.dchip{border:3px solid #d8c8f5;background:#fff;border-radius:12px;padding:6px 12px;font-weight:800;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 3px 0 #0001;text-align:left}
+.dchip.long{font-weight:600;font-size:16px;max-width:100%}
+.dchip.pick{border-color:var(--navy);background:#e8ecff;transform:scale(1.04)}
+.ghost{position:fixed;z-index:100;pointer-events:none;opacity:.92;transform:rotate(-3deg) scale(1.05);box-shadow:0 10px 24px #0003}
+/* highlighter hot text */
+.markers{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.mk{border:3px solid transparent;border-radius:12px;padding:6px 12px;font-weight:800;color:#fff}
+.mk.m1{background:var(--p1)}.mk.m2{background:var(--p2)}.mk.m3{background:var(--p3)}.mk.m0{background:#9a8fb0}
+.mk.on{border-color:var(--navy);transform:scale(1.08);box-shadow:0 0 0 3px #fff inset}
+.hl{line-height:2.2}
+.tk{border:0;background:transparent;border-radius:6px;padding:1px 3px;margin:0 1px;font-weight:600}
+.tk.c1{background:var(--p1l);box-shadow:inset 0 -3px var(--p1)}.tk.c2{background:var(--p2l);box-shadow:inset 0 -3px var(--p2)}.tk.c3{background:var(--p3l);box-shadow:inset 0 -3px var(--p3)}
+.tk.ok::after{content:"✓";color:var(--green);font-weight:800;margin-left:2px}
+.tk.bad{background:#ffd1d1!important;box-shadow:inset 0 -3px var(--red)!important}
+.tk.miss1{outline:3px dashed var(--p1)}.tk.miss2{outline:3px dashed var(--p2)}.tk.miss3{outline:3px dashed var(--p3)}
+.sent{display:inline;text-align:left;border:0;background:transparent;border-radius:8px;padding:2px 3px;font-weight:600;border-bottom:3px dotted #c9b6ff;line-height:1.9}
+.sent.on{background:#fff176;border-bottom-color:#f5b301}
+.sent.right{background:#bff0d4!important}.sent.wrong{background:#ffd1d1!important}.sent.miss{outline:3px solid var(--green)}
+.checkbtn{background:linear-gradient(90deg,#ff4fa3,#7b3fe4);color:#fff;border:0;border-radius:14px;padding:10px 22px;font-weight:800;font-size:17px;margin-top:10px;box-shadow:0 4px 0 #0002}
+.checkbtn:disabled{opacity:.4}
+.fb{border-radius:14px;padding:10px 14px;margin-top:10px;font-weight:600}
+.fb.yes{background:#e6f8ef;border:2px solid #9fe0bf}.fb.no{background:#fff1e6;border:2px solid #ffc9a3}
+.note{font-size:14px;color:#6b6250}
+textarea{width:100%;min-height:150px;font:inherit;padding:12px;border:3px solid var(--line);border-radius:14px;background:#fffdfa}
+.starters{background:#f6f0ff;border-radius:12px;padding:8px 14px;margin:8px 0;font-size:16px}
+.wc{font-size:14px;font-weight:800;color:#6b6250}.wc.ok{color:var(--green)}
+.nextbtn{display:block;margin:22px auto 0;background:var(--navy);color:#fff;border:0;border-radius:16px;padding:14px 26px;font:600 20px Fredoka;box-shadow:0 5px 0 #0003}
+.stam{background:linear-gradient(150deg,#2a1b5e,#7b3fe4);color:#fff;border-radius:22px;padding:16px 18px;text-align:center}
+.battery{display:flex;gap:4px;justify-content:center;margin:8px 0}
+.battery span{width:26px;height:34px;border-radius:6px;background:#ffffff30;transition:.3s}
+.battery span.on{background:linear-gradient(180deg,#ffe066,#1fb36b)}
+.trophy{text-align:center}.trophy .big{font-size:72px;display:block}
+.rbtns button{background:var(--navy);color:#fff;border:0;border-radius:12px;padding:10px 16px;font-weight:800;margin:6px 6px 0 0}
+#report{white-space:pre-wrap;background:#fffaf0;border:2px dashed var(--gold);border-radius:14px;padding:14px;margin-top:12px;font-size:15px}
+#report:empty{display:none}
+footer{text-align:center;font-size:14px;color:#6b6250;padding:16px 16px 40px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(160px);background:var(--navy);color:#fff;font:600 19px Fredoka;padding:12px 22px;border-radius:16px;box-shadow:0 10px 30px #0004;transition:transform .35s;z-index:50;text-align:center;max-width:92vw}
+#toast.show{transform:translateX(-50%) translateY(0)}
+.conf{position:fixed;top:-20px;width:10px;height:14px;z-index:60;pointer-events:none;border-radius:2px;animation:fall 1.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.6}}
+.poem{background:#fffdf5;border:3px solid #e9dcb5;border-radius:16px;padding:12px 16px;margin:10px 0;font-size:18px;box-shadow:inset 0 0 0 4px #fff}
+.ptitle{font:600 20px Fredoka;color:#0f5132;margin-bottom:6px}
+.pl{display:flex;gap:10px;align-items:baseline;padding:2px 6px;border-radius:8px}
+.ln{width:22px;flex:none;text-align:right;font-size:13px;color:#9a8f70;font-weight:800}
+.rt{margin-left:auto;font:700 15px Fredoka;color:#fff;background:#0fa3a3;border-radius:8px;padding:0 8px}
+.gap{height:12px}
+.pl.q1{background:#e2f8ec}.pl.q2{background:#e0edff}.pl.q3{background:#efe5ff}.pl.cp{background:#ffe9d6;font-weight:800}
+.r1{background:#ffe1ef;border-radius:6px}.r2{background:#d9f3ff;border-radius:6px}.pl.r1,.pl.r2{font-weight:800}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0}.feat div{background:linear-gradient(150deg,#0f5132,#1fb36b);color:#fff;border-radius:16px;padding:10px;text-align:center;font-weight:700;font-size:15px}
+.feat b{display:block;font:700 24px Fredoka}
+@media(max-width:640px){.feat{grid-template-columns:repeat(2,1fr)}}
+.rl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border:3px solid transparent;border-radius:12px;padding:6px 8px;margin:4px 0}
+.rlt{flex:1 1 260px}.rls{display:flex;gap:6px;align-items:center}
+.rb{width:40px;height:40px;border-radius:50%;border:3px solid var(--line);background:#fff;font:700 18px Fredoka}
+.rb.on{color:#fff}.rb.LA{background:#ff4fa3;border-color:#ff4fa3}.rb.LB{background:#3d8bfd;border-color:#3d8bfd}.rb.LC{background:#1fb36b;border-color:#1fb36b}.rb.LD{background:#f5b301;border-color:#f5b301}
+.bat{position:absolute;font-size:26px;opacity:.8;animation:flap 9s linear infinite}.bat.b1{top:10px;left:-40px}.bat.b2{top:60px;left:-80px;animation-delay:3s;font-size:20px}.bat.b3{top:30px;left:-60px;animation-delay:6s;font-size:32px}
+@keyframes flap{0%{transform:translate(0,0)}25%{transform:translate(30vw,-12px)}50%{transform:translate(60vw,10px)}75%{transform:translate(90vw,-8px)}100%{transform:translate(115vw,0)}}
+@media (prefers-reduced-motion:reduce){.bat{animation:none;display:none}}
+#pbtn{position:fixed;left:14px;bottom:18px;z-index:40;background:linear-gradient(90deg,#4b1f8f,#e85d04);color:#fff;border:0;border-radius:16px;padding:12px 18px;font:600 18px Fredoka;box-shadow:0 6px 16px #0003}
+#drawer{position:fixed;right:0;top:0;bottom:0;width:min(560px,100vw);background:#fff;z-index:70;box-shadow:-10px 0 30px #0003;padding:14px 16px;overflow:auto;transform:translateX(105%);transition:transform .3s}
+#drawer.open{transform:none}
+.dhead{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;position:sticky;top:-14px;background:#fff;padding:6px 0}
+.dtabs button{border:3px solid var(--line);background:#fff;border-radius:99px;padding:3px 10px;font-weight:800;font-size:14px;margin:2px}.dtabs button.on{background:#e85d04;border-color:#e85d04;color:#fff}
+.gridwrap{overflow-x:auto}.grid td,.grid th{text-align:center;vertical-align:middle}.grid .gq{text-align:left;font-weight:600;min-width:220px}
+.gb{width:40px;height:40px;border-radius:12px;border:3px solid #cfc4ea;background:#fff;font:800 20px Nunito;color:#fff}
+.gb.on{background:#7b3fe4;border-color:#7b3fe4}.gb.ans{outline:3px solid #1fb36b;outline-offset:2px}
+tr.gright{background:#e6f8ef}tr.gwrong{background:#fdeaea}
+@media print{#pbtn,#drawer{display:none!important}header,.hud,.map,.start,footer,#app>section>*:not(#repCard){display:none!important}body{background:#fff}#report{border:0}}
+</style>
+</head>
+<body>
+<header style="position:relative;overflow:hidden"><span class="bat b1">🦇</span><span class="bat b2">🦇</span><span class="bat b3">🦇</span><div class="hwrap" style="position:relative">
+  <img class="logo" src="logo.png" alt="The Literacy Locksmith logo" onerror="this.style.display='none';document.getElementById('lf').style.display='block'">
+  <div class="logo-fallback" id="lf">🗝️ The Literacy<br>Locksmith<small>Unlocking Skills. Opening Minds. Building Readers.</small></div>
+  <div><p class="kicker">🎃 FLORIDA FAST • GRADE 6 ELA READING • HALLOWEEN EDITION 🦇</p><h1>🎃 Halloween Stamina Sprint: The Teal Pumpkin Trail</h1><p>Three connected passages. PROVE it! Collect spooky-cool badges and build your testing stamina. 👻</p></div>
+</div></header>
+
+<div class="hud"><div class="hudin">
+  <span class="lvl" id="lvl">🍬 Candy Corn Rookie</span><span class="xpnum" id="clock" title="Time on task">⏱ 0:00</span>
+  <div class="xpbar"><span id="xpfill"></span></div>
+  <span class="xpnum" id="xpnum">0 XP</span>
+  <span class="streak" id="streak" title="Correct in a row">🔥 0</span>
+  <span class="badges"><span id="b1" title="Story Sleuth">🎃</span><span id="b2" title="Fact Finder">🕯️</span><span id="b3" title="Argument Ace">🦇</span><span id="b4" title="Stamina Champ">👻</span></span>
+  <span id="savedBadge">💾 Saved on this iPad</span>
+  <button class="tbtn" id="stopBtn">⏹ Stop</button>
+  <span class="note">🐢</span><input class="rate" id="rate" type="range" min="0.7" max="1.2" step="0.05" value="0.95" aria-label="Reading speed"><span class="note">🐇</span>
+  <button class="tbtn" id="soundBtn">🔔 On</button>
+</div></div>
+
+<main>
+  <div class="start"><label for="student"><b>👋 Your name:</b></label><input id="student" placeholder="First and last name" autocomplete="off"></div>
+  <nav class="map" id="map"></nav>
+  <div id="app"></div>
+</main>
+<footer>The Literacy Locksmith • Created and copyrighted by Donna Rees • Original passages and practice</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<button id="pbtn" class="noread">📖 Passages</button>
+<div id="drawer" aria-hidden="true"><div class="dhead"><b class="fred">📖 Reread the Passages</b><span class="dtabs"><button data-ptab="1">🎃 1: Story</button><button data-ptab="2">🕯️ 2: Article</button><button data-ptab="3">🦇 3: Letter</button></span><button id="dclose" class="tbtn">✖ Close</button></div><div id="dbody"></div><button class="tbtn" id="dsay" style="margin-top:8px">🔊 Read this passage</button></div>
+
+<script>
+/* ===================== CONTENT ===================== */
+const STD='FAST ELA Reading Grade 6 • Prove-It Practice';
+const P1=`<div class="passage"><b>Passage 1: The Teal Pumpkin</b> <span class="note">(original story)</span>
+<p><b>[1]</b> Theo zipped up his astronaut costume and stared at the empty pillowcase in his hands. Every Halloween ended the same way: he came home with a full bag, and his mom sorted out everything with peanuts in it. By the time she finished, his treasure was a sad little pile of three lollipops.</p>
+<p><b>[2]</b> “Maybe I’ll skip it this year,” he mumbled.</p>
+<p><b>[3]</b> His older sister, Gabby, straightened her witch hat. “And waste that helmet? No way. Come on.”</p>
+<p><b>[4]</b> Theo trudged behind her, his sneakers scuffing the sidewalk as if they were made of lead. Porch lights glowed orange up and down Maple Street, and jack-o’-lanterns grinned from every step.</p>
+<p><b>[5]</b> Then he saw it. On Mrs. Kim’s porch sat a pumpkin painted the bright blue-green of a swimming pool. Next to it was a bowl overflowing with glow sticks, spider rings, and tiny bouncy balls. A hand-lettered sign read: <i>Teal pumpkin = treats for EVERYONE.</i></p>
+<p><b>[6]</b> Theo stopped so fast that Gabby bumped into him. He looked at the sign, then at Mrs. Kim, then back at the sign.</p>
+<p><b>[7]</b> “Go ahead,” Mrs. Kim said, smiling. “I heard some kids on our street can’t have candy. Nobody should feel left out on Halloween.”</p>
+<p><b>[8]</b> Theo chose a glow stick and snapped it. Green light spilled across his gloves. For the rest of the night, he didn’t just follow Gabby. He led the way, pointing out two more teal pumpkins before they reached the end of the block.</p></div>`;
+const P2=`<div class="passage"><b>Passage 2: From Turnips to Teal: The Story of the Jack-o’-Lantern</b> <span class="note">(original article)</span>
+<p><b>[1]</b> Every October, carved pumpkins glow on porches across the United States. But the first jack-o’-lanterns were not pumpkins at all. Their story stretches across an ocean and hundreds of years, and it is still changing today.</p>
+<h5>Turnips and a Tricky Legend</h5>
+<p><b>[2]</b> In Ireland and Scotland, people once carved faces into turnips and other root vegetables during autumn festivals. An old Irish folktale tells of “Stingy Jack,” a trickster said to wander the dark with only a glowing coal inside a carved turnip to light his way. People began calling such lanterns “Jack of the lantern,” which later became “jack-o’-lantern.”</p>
+<p><b>[3]</b> Turnips were small and hard to hollow out. Carving one took patience and a strong knife.</p>
+<h5>A New Vegetable in a New Land</h5>
+<p><b>[4]</b> In the 1800s, many Irish families moved to the United States. There they found pumpkins, which are native to North America. Pumpkins were bigger, softer, and much easier to carve than turnips. Before long, the pumpkin became the jack-o’-lantern most Americans know.</p>
+<h5>A New Color</h5>
+<p><b>[5]</b> Traditions keep changing to fit the people who celebrate them. Food allergies can make trick-or-treating stressful for some children, since many candies contain nuts, milk, or other allergens. In 2014, a national food allergy organization launched the Teal Pumpkin Project. Families place a teal pumpkin outside to show that they offer non-food treats, such as stickers, pencils, or glow sticks.</p>
+<p><b>[6]</b> From a turnip lit by a coal to a pumpkin painted teal, the jack-o’-lantern has always reflected the needs of its time. Each change has helped more people join the celebration.</p></div>`;
+const P3=`<div class="passage"><b>Passage 3: Join the Teal Pumpkin Trail!</b> <span class="note">(original letter)</span>
+<p>Dear Oakridge Families,</p>
+<p><b>[1]</b> Last year at our Fall Festival, a fourth grader stood by the candy table holding an empty bag. She has a milk allergy, and almost every treat on the table was off-limits.</p>
+<p><b>[2]</b> This year, the Student Council is asking every family that decorates a car for our Trunk-or-Treat on October 30 to offer at least one non-food treat and display a teal pumpkin. In our school survey, 41 students reported having a food allergy, which is more than one student in almost every classroom.</p>
+<p><b>[3]</b> Some people say Halloween is all about candy, and we understand! You can still hand out candy. Just keep a second bowl of stickers, pencils, or glow sticks so every student has a choice.</p>
+<p><b>[4]</b> Picture walking from trunk to trunk, hoping just one treat is safe for you. Together, we can make sure no one walks home with an empty bag.</p>
+<p>Sincerely,<br>Jordan Ellis, Student Council President, for the Oakridge Student Council</p></div>`;
+const PASSAGES={1:P1,2:P2,3:P3};
+const PBNAMES=['1: Story','2: Article','3: Letter'];
+
+const PLAYBOOK=`<p>On FAST, <b>recognizing</b> an answer is not enough. You have to <b>prove</b> it with the passage. Use this playbook on every question:</p>
+<div class="feat"><div><b>1️⃣ Read</b>the question first so you know your mission</div><div><b>2️⃣ Think</b>answer it in your head before looking at choices</div><div><b>3️⃣ Prove</b>go back and find the exact words that support it</div><div><b>4️⃣ Zap traps</b>cross out choices that are true but off-topic, too extreme, or not in the text</div></div>
+<table><tr><th>FAST format</th><th>What to do</th></tr>
+<tr><td>🅰️🅱️ Evidence-Based (Part A / Part B)</td><td>Answer Part A, then choose the evidence that PROVES it in Part B.</td></tr>
+<tr><td>☑️ Multiselect</td><td>Choose exactly the number of answers asked for.</td></tr>
+<tr><td>👆 Hot Text</td><td>Select the sentence that best supports the answer.</td></tr>
+<tr><td>🔲 Table Match</td><td>Match each statement to the correct column in the grid.</td></tr>
+<tr><td>✋ Drag & Drop</td><td>Sort statements or quotations into the right category.</td></tr></table>`;
+
+
+
+const LEVELS=[
+{id:1,cls:'l1',name:'Story Station',icon:'🎃',sub:'Prose • ~13 min',badge:'🎃 Story Sleuth',bg:'linear-gradient(130deg,#e85d04,#ffa94d)',passage:1,
+ ican:['make inferences and prove them with text evidence.','identify a theme and explain how it develops.','explain what figurative language and word choice add to meaning.'],
+ learn:[{t:'🧠 The Prove-It Playbook',h:PLAYBOOK},{t:'📖 Read Passage 1',h:P1}],
+ acts:[
+ {type:'ab',dok:2,std:'ELA.K12.EE.3.1 / EE.1.1',title:'Inference + Evidence',
+  A:{q:'Part A: What can the reader infer about Theo at the BEGINNING of the story?',o:['He feels discouraged because Halloween usually disappoints him.','He is excited to eat all of his candy.','He is angry at Gabby for wearing a witch hat.','He is scared of other kids’ costumes.'],a:[0]},
+  B:{q:'Part B: Which detail BEST supports your answer to Part A?',o:['“Theo zipped up his astronaut costume”','“By the time she finished, his treasure was a sad little pile of three lollipops.”','“Porch lights glowed orange up and down Maple Street”','“His older sister, Gabby, straightened her witch hat.”'],a:[1]},
+  w:'A “sad little pile” shows why Theo feels let down. Choice A in Part B is TRUE, but it doesn’t prove how he feels. Trap zapped! 🦇'},
+ {type:'hot',dok:1,std:'ELA.6.R.3.1',title:'Hot Text: Figurative Language',q:'Select the sentence that uses a SIMILE to show that Theo does not want to go trick-or-treating.',sents:['Theo trudged behind her, his sneakers scuffing the sidewalk as if they were made of lead.','Porch lights glowed orange up and down Maple Street.','Then he saw it.','Next to it was a bowl overflowing with glow sticks, spider rings, and tiny bouncy balls.'],a:[0],w:'“As if they were made of lead” compares his feet to heavy metal. He drags along because he doesn’t want to go.'},
+ {type:'mc',dok:2,std:'ELA.6.R.1.2',title:'Multiselect: Theme',q:'Which TWO statements BEST express a theme of the story?',o:['Kindness can help people feel included.','Halloween','Small actions can make a big difference.','Candy is bad for everyone.','Older siblings are always right.'],a:[0,2],w:'A theme is a life lesson in a full sentence. “Halloween” is a TOPIC, not a theme. That’s a classic FAST trap!'},
+ {type:'mc',dok:3,std:'ELA.6.R.1.2',title:'Theme Development',q:'How does paragraph 8 help develop the theme?',o:['Theo goes from following to leading and spots more teal pumpkins, showing how one kind act changed his whole night.','It proves Theo will never need help again.','It explains how to make a glow stick light up.','It shows that Theo is still upset at the end.'],a:[0],w:'Theo’s change from dragging his feet to leading the way shows the impact of Mrs. Kim’s kindness.'},
+ {type:'mc',dok:2,std:'ELA.6.V.1.3',title:'Word Choice & Connotation',q:'In paragraph 1, the author calls Theo’s treats “a sad little pile.” What does this phrase suggest?',o:['The amount is small and disappointing.','The candy is crying.','The pile is too big to carry.','Theo’s mom is sad.'],a:[0],w:'“Sad” and “little” carry a negative connotation that shows how disappointing Halloween has been for Theo.'}
+ ]},
+{id:2,cls:'l2',name:'Article Station',icon:'🕯️',sub:'Informational • ~12 min',badge:'🕯️ Fact Finder',bg:'linear-gradient(130deg,#5b2bc4,#a879ff)',passage:2,
+ ican:['tell the central idea apart from supporting details.','explain how text structure and headings develop ideas.','analyze the author’s purpose and perspective.'],
+ learn:[{t:'📖 Read Passage 2',h:P2},{t:'💡 Quick Tips',h:`<p><b>Central idea</b> = what the WHOLE text is mostly about (big umbrella ☂️). <b>Supporting details</b> = the facts under the umbrella. <b>Perspective</b> = how the author thinks or feels about the topic, so look at word choice and the ending.</p>`}],
+ acts:[
+ {type:'mc',dok:1,spiral:'Station 1',std:'ELA.6.R.1.2',title:'Spiral Warm-Up',q:'Which is a THEME, not a topic?',o:['Pumpkins','Costumes','Including others shows kindness.','October'],a:[2],w:'Themes are complete-sentence life lessons.'},
+ {type:'hot',dok:2,std:'ELA.6.R.2.2',title:'Hot Text: Central Idea',q:'Select the sentence that BEST states the central idea of the whole article.',sents:['Every October, carved pumpkins glow on porches across the United States.','But the first jack-o’-lanterns were not pumpkins at all.','Turnips were small and hard to hollow out.','From a turnip lit by a coal to a pumpkin painted teal, the jack-o’-lantern has always reflected the needs of its time.'],a:[3],w:'The whole article traces how the jack-o’-lantern changed over time. The other sentences are details.'},
+ {type:'dnd',dok:2,std:'ELA.6.R.2.2',title:'Drag & Drop: Umbrella Sort',q:'Drag each statement into the correct category.',bins:['☂️ Central idea','🧩 Supporting detail','🚫 Not in the text'],binC:['#7b3fe4','#1fb36b','#e5484d'],long:true,
+  chips:[['The jack-o’-lantern tradition has changed over time to fit people’s needs.',0],['People in Ireland once carved turnips.',1],['Pumpkins are easier to carve than turnips.',1],['A teal pumpkin shows that a home offers non-food treats.',1],['Pumpkins were first grown in Ireland.',2]]},
+ {type:'mc',dok:2,std:'ELA.6.R.2.1',title:'Text Structure',q:'How is the article MAINLY organized?',o:['In time order, from the first turnip lanterns to today’s teal pumpkins','As a list of pumpkin recipes','As a comparison of two holidays','As a set of directions for carving'],a:[0],w:'The headings move from long ago to the 1800s to 2014. That’s chronological (time) order.'},
+ {type:'ab',dok:3,std:'ELA.6.R.2.3',title:'Author’s Purpose & Perspective',
+  A:{q:'Part A: Which statement BEST describes the author’s perspective?',o:['Changing traditions can be a good thing when they include more people.','Turnip carving should be banned.','Halloween should not be celebrated anymore.','Only the oldest traditions are worth keeping.'],a:[0]},
+  B:{q:'Part B: Which sentence BEST supports your answer to Part A?',o:['“Turnips were small and hard to hollow out.”','“Each change has helped more people join the celebration.”','“In the 1800s, many Irish families moved to the United States.”','“Every October, carved pumpkins glow on porches.”'],a:[1]},
+  w:'The ending reveals the author’s view: change is positive when it welcomes more people. Choices B and C in Part A are too extreme!'}
+ ]},
+{id:3,cls:'l3',name:'Argue & Compare',icon:'🦇',sub:'Across Genres • ~15 min',badge:'🦇 Argument Ace',bg:'linear-gradient(130deg,#14935a,#3fd38a)',passage:3,
+ ican:['evaluate a claim, reasons, evidence, and rhetoric.','compare how different authors approach the same topic.'],
+ learn:[{t:'📖 Read Passage 3',h:P3},{t:'💡 Quick Tips',h:`<p><b>Claim</b> = what the writer wants you to believe or do. <b>Evidence</b> = facts or data that prove it. <b>Counterclaim</b> = the other side, which a strong writer answers. <b>Rhetorical appeals:</b> <b>Logos</b> = logic and facts 🧠 • <b>Pathos</b> = emotions ❤️ • <b>Ethos</b> = trust and credibility 🤝</p>`}],
+ acts:[
+ {type:'mc',dok:2,spiral:'Station 2',std:'ELA.6.R.2.2',title:'Spiral Warm-Up',q:'A supporting detail…',o:['states what the whole text is about','gives facts or examples that explain the central idea','is always the first sentence','is the author’s opinion only'],a:[1],w:'Details hold up the central-idea umbrella.'},
+ {type:'grid',dok:2,std:'ELA.6.R.2.4',title:'Table Match: Parts of an Argument',q:'For each sentence from the letter, select the role it plays.',cols:['Claim','Evidence','Counterclaim + Response','Emotional Appeal'],
+  rows:[['“The Student Council is asking every family… to offer at least one non-food treat and display a teal pumpkin.”',0],['“In our school survey, 41 students reported having a food allergy…”',1],['“Some people say Halloween is all about candy… You can still hand out candy.”',2],['“Picture walking from trunk to trunk, hoping just one treat is safe for you.”',3]]},
+ {type:'dnd',dok:2,std:'ELA.6.R.3.4',title:'Drag & Drop: Rhetorical Appeals',q:'Drag each part of the letter to the appeal it uses MOST.',bins:['🧠 Logos','❤️ Pathos','🤝 Ethos'],binC:['#3d8bfd','#ff4fa3','#1fb36b'],long:true,
+  chips:[['“In our school survey, 41 students reported having a food allergy…”',0],['“a fourth grader stood by the candy table holding an empty bag”',1],['“Jordan Ellis, Student Council President, for the Oakridge Student Council”',2],['“we can make sure no one walks home with an empty bag”',1],['“keep a second bowl of stickers, pencils, or glow sticks so every student has a choice”',0]]},
+ {type:'mc',dok:3,std:'ELA.6.R.2.4',title:'Evaluate the Evidence',q:'Which additional evidence would MOST strengthen the Student Council’s claim?',o:['The total number of students at the school, so readers can see what part of the school 41 students is','A list of the council’s favorite candies','A description of the council president’s costume','The date of the very first Halloween'],a:[0],w:'“41 students” means more when you know the total. That would make the logos much stronger.'},
+ {type:'grid',dok:3,std:'ELA.6.R.3.3',title:'Table Match: Compare the Passages',q:'Select which passage each statement describes: Passage 1 (story), Passage 2 (article), or BOTH.',cols:['Passage 1','Passage 2','Both'],
+  rows:[['Shows teal pumpkins through one character’s experience and feelings',0],['Explains where jack-o’-lanterns came from',1],['Describes a teal pumpkin as a sign of treats everyone can enjoy',2],['Gives the year the Teal Pumpkin Project began',1],['Uses a character’s change to show a theme',0]]},
+ {type:'mc',dok:2,std:'ELA.6.R.3.3',title:'Multiselect: Shared Ideas',q:'Which TWO ideas appear in BOTH the article (Passage 2) and the letter (Passage 3)?',o:['Non-food treats such as stickers, pencils, or glow sticks can be offered.','Food allergies can make trick-or-treating hard for some children.','Jack-o’-lanterns were first carved from turnips.','The Trunk-or-Treat is on October 30.'],a:[0,1],w:'Both mention non-food treats and food allergies. The other two each appear in only ONE passage.'}
+ ]},
+{id:4,cls:'l4',name:'Stamina Finish',icon:'👻',sub:'Mixed Spiral • ~8 min',badge:'👻 Stamina Champ',bg:'linear-gradient(130deg,#2b2140,#6a32d9)',stamina:true,passage:1,
+ ican:['push through a mixed final round that spirals back to all three passages!'],
+ learn:[],
+ acts:[
+ {type:'mc',dok:2,spiral:'Passage 1',std:'ELA.6.R.1.3',title:'Round 1: Point of View',q:'“The Teal Pumpkin” is told in third person limited, following Theo. How does this point of view affect the reader?',o:['Readers share Theo’s disappointment and surprise, but don’t know Mrs. Kim’s plan until she speaks.','Readers know every character’s thoughts from the start.','Readers hear the story from Mrs. Kim.','It turns the story into a poem.'],a:[0],w:'Limited POV keeps us inside Theo’s head, so we discover the teal pumpkin right along with him.'},
+ {type:'mc',dok:2,spiral:'Passage 1',std:'ELA.K12.EE.3.1',title:'Round 2: Inference',q:'“Theo stopped so fast that Gabby bumped into him.” What can the reader infer?',o:['Theo was surprised and excited by what he saw.','Theo was tired and wanted to go home.','Gabby was walking too slowly.','Theo dropped his pillowcase.'],a:[0],w:'Stopping suddenly shows the teal pumpkin grabbed his attention.'},
+ {type:'mc',dok:2,spiral:'Passage 1',std:'ELA.6.R.3.1',title:'Round 3: Figurative Language',q:'“Jack-o’-lanterns grinned from every step.” What does this personification add to the story?',o:['It creates a festive, friendly Halloween mood.','It shows the pumpkins are dangerous.','It proves the pumpkins can talk.','It explains how pumpkins are carved.'],a:[0],w:'Giving pumpkins a human “grin” makes the street feel cheerful and alive.'},
+ {type:'hot',dok:2,spiral:'Passage 3',std:'ELA.K12.EE.1.1',title:'Round 4: Prove It!',q:'Select the sentence from the letter that BEST supports the idea that families do NOT have to give up candy.',sents:['“She has a milk allergy, and almost every treat on the table was off-limits.”','“Some people say Halloween is all about candy, and we understand!”','“You can still hand out candy.”','“Together, we can make sure no one walks home with an empty bag.”'],a:[2],w:'This sentence directly answers the worry: candy can stay!'},
+ {type:'write',dok:3,id:'w1',std:'Reflection',title:'Round 5: Stamina Reflection',q:'Which question type was the hardest for you today (Part A/B, multiselect, hot text, table match, or drag & drop)? What strategy from the Prove-It Playbook will you use next time?',starters:'💬 The hardest question type for me was… because… Next time I will…'}
+ ]}
+];
+
+/* ===================== STATE + AUTOSAVE ===================== */
+const KEY='halloweenStaminaSprint_v1';
+let S={name:'',lv:1,d:{},sound:true,rate:0.95,streak:0,best:0,badges:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)S=Object.assign(S,s)}catch(e){}
+/* Autosave on this iPad: saves every tap/keystroke, when the app is switched or closed, and asks the browser to keep the data */
+let okStore=true;try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){okStore=false}
+function markSaved(){const b=document.getElementById('savedBadge');if(b)b.textContent=okStore?'💾 Saved on this iPad '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):'⚠️ Not saving: turn off Private/Incognito mode'}
+if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){okStore=false}markSaved()}
+window.addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+
+const aid=(l,i)=>'l'+l+'a'+(i+1);
+const words=t=>(t||'').trim().split(/\s+/).filter(Boolean).length;const MINW=15;
+const getD=id=>S.d[id]||(S.d[id]={});
+function parseHL(text){return text.split(' ').map(w=>{const m=w.match(/\{(\d)\|([^}]+)\}/);return m?{t:w.replace(m[0],m[2]),c:+m[1]}:{t:w,c:0}})}
+function maxPts(a){return a.type==='grid'?a.rows.length*5:a.type==='rhyme'?a.lines.length*5:a.type==='mc'?(a.a.length>1?20:10):a.type==='ab'?20:a.type==='dnd'?a.chips.length*5:a.type==='hl'?(a.max||20):a.type==='hot'?10:15}
+function earned(a,id){const d=S.d[id];if(!d)return 0;if(a.type==='write')return words(d.text)>=MINW?15:0;return d.done?d.pts:0}
+const isDone=(a,id)=>{const d=S.d[id];return a.type==='write'?!!d&&words(d.text)>=MINW:!!d&&!!d.done};
+const ALL=[];LEVELS.forEach(L=>L.acts.forEach((a,i)=>ALL.push({L,a,id:aid(L.id,i)})));
+const MAXXP=ALL.reduce((s,x)=>s+maxPts(x.a),0);
+const xp=()=>ALL.reduce((s,x)=>s+earned(x.a,x.id),0);
+const lvDone=L=>L.acts.every((a,i)=>isDone(a,aid(L.id,i)));
+const lvCount=L=>L.acts.filter((a,i)=>isDone(a,aid(L.id,i))).length;
+function title(x){const p=x/MAXXP;return p>=.85?'👑 Monster Reader':p>=.6?'🦇 Bat-Brain Reader':p>=.3?'🎃 Pumpkin Pro':'🍬 Candy Corn Rookie'}
+
+/* ===================== FX ===================== */
+let ac;function tone(fs){if(!S.sound)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const t=ac.currentTime;fs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,t+i*.11);g.gain.exponentialRampToValueAtTime(.18,t+i*.11+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.11+.2);o.connect(g).connect(ac.destination);o.start(t+i*.11);o.stop(t+i*.11+.22)})}catch(e){}}
+function confetti(n=40){const cs=['#ff7a00','#7b3fe4','#1fb36b','#2b2140','#ffb703','#ffffff'],em=['🎃','🦇','👻','🍬','🍭','⭐'];for(let i=0;i<n;i++){const d=document.createElement('div');d.className='conf';if(i%5===0){d.textContent=em[i%em.length];d.style.background='transparent';d.style.fontSize='22px';d.style.width='auto';d.style.height='auto'}d.style.left=Math.random()*100+'vw';if(!d.textContent)d.style.background=cs[i%cs.length];d.style.animationDelay=Math.random()*.5+'s';d.style.animationDuration=1.3+Math.random()*1.4+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),3400)}}
+let tt;function toast(m,ms=2600){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),ms)}
+const YAY=['🎃 Spook-tacular!','🦇 Bat-tastic thinking!','👻 Boo-yah! Nailed it!','🍬 Sweet answer!','🕸️ You caught that one!','🔥 You’re on fire!','🧠 Big-brain move!'];
+const GROW=['💡 No tricks, just learning! Read the tip and keep going!','👻 Don’t let that one spook you. On to the next!','💪 Shake it off. You’ve got the next one!','🎃 Good try! Check the explanation, then power on!'];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function result(pts,max){const ok=pts>=max;if(ok){S.streak++;S.best=Math.max(S.best,S.streak);tone([660,880,1047]);confetti(28);toast(pick(YAY)+' +'+pts+' XP'+(S.streak>=3?'  🔥'+S.streak+' in a row!':''))}else{S.streak=0;tone([330,260]);toast((pts?'👍 +'+pts+' XP. ':'')+pick(GROW))}save();afterProgress()}
+function afterProgress(){LEVELS.forEach(L=>{if(lvDone(L)&&!S.badges[L.id]){S.badges[L.id]=1;save();setTimeout(()=>{tone([523,659,784,1047,1319]);confetti(L.id===4?160:90);toast('🏅 Badge unlocked: '+L.badge+'!',3400)},1000)}});hud();lprog();renderMap();if(S.lv===4)stamina()}
+
+/* ===================== READ ALOUD ===================== */
+let voice=null;
+function pickVoice(){if(!('speechSynthesis' in window))return;const v=speechSynthesis.getVoices();voice=v.find(x=>x.name==='Google US English')||v.find(x=>x.lang==='en-US'&&/Samantha|Aria|Jenny|Zira|Ava|Allison|female/i.test(x.name))||v.find(x=>x.lang==='en-US')||null}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+const clean=t=>t.replace(/\b(?:ELA\.)?(?:K12|\d)\.[A-Z]{1,2}\.\d+(?:\.\d+)?\b/g,' ').replace(/\bDOK\s*(\d)/g,'').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}\u{2B50}]/gu,' ').replace(/→/g,', then, ').replace(/\s*\/\s*/g,' or ').replace(/\[(\d)\]/g,'Paragraph $1. ').replace(/\s+([.,])/g,'$1').replace(/(\.\s*){2,}/g,'. ').replace(/\s{2,}/g,' ').trim();
+function textOf(el){const c=el.cloneNode(true);c.querySelectorAll('.noread,.say,textarea,.checkbtn,.tag,.pts').forEach(x=>x.remove());c.querySelectorAll('.pl,.rlt,.ptitle,.feat div,td,th,li,p,h4,h5,.opt,.bin>b,.dchip,.sent,.lens div,.cam div,.part').forEach(x=>x.append('. '));return c.textContent}
+let spEl=null;function stopSpeak(){if('speechSynthesis' in window)speechSynthesis.cancel();if(spEl)spEl.classList.remove('speaking');spEl=null}
+function speak(text,el){if(!('speechSynthesis' in window)){toast('Read-aloud is not available on this device.');return}const same=spEl===el;stopSpeak();if(same)return;const c=clean(text),parts=c.match(/[^.!?]+[.!?]*/g)||[c],ch=[];let cur='';parts.forEach(p=>{if((cur+p).length>220&&cur){ch.push(cur);cur=p}else cur+=p});if(cur.trim())ch.push(cur);spEl=el;el&&el.classList.add('speaking');ch.forEach((x,i)=>{const u=new SpeechSynthesisUtterance(x.trim());if(voice)u.voice=voice;u.lang='en-US';u.rate=+S.rate;if(i===ch.length-1)u.onend=()=>{if(spEl===el){el&&el.classList.remove('speaking');spEl=null}};speechSynthesis.speak(u)})}
+
+/* ===================== RENDER ACTIVITIES ===================== */
+const $=s=>document.querySelector(s);
+const L_='ABCD';
+function mcOpts(id,part,o,ans,sel,done){return o.map((t,j)=>{let c='opt';if(sel.includes(j))c+=' sel';if(done){if(ans.includes(j))c+=' right';else if(sel.includes(j))c+=' wrong'}return `<button class="${c}" data-act="${id}" data-part="${part}" data-mc="${j}" ${done?'disabled':''}><span class="let">${L_[j]}</span><span>${t}</span></button>`}).join('')}
+const chk=(id,ready)=>`<button class="checkbtn" data-check="${id}" ${ready?'':'disabled'}>🔒 Lock it in</button><p class="note noread">One try, so double-check before you lock it in!</p>`;
+const fb=(ok,w)=>`<div class="fb ${ok?'yes':'no'}">${ok?'🎉 Perfect! ':'💡 '}${w||''}</div>`;
+function actHTML(L,a,i){const id=aid(L.id,i),d=S.d[id]||{},max=maxPts(a);let b='';
+ if(a.type==='mc'){const sel=d.sel||[];b=mcOpts(id,'x',a.o,a.a,sel,d.done)+(d.done?fb(d.pts===max,a.w):chk(id,sel.length===a.a.length))}
+ if(a.type==='ab'){const sa=d.A||[],sb=d.B||[];b=(a.passage?`<div class="passage">${a.passage}</div>`:'')+`<span class="part">Part A</span><p><b>${a.A.q}</b></p>`+mcOpts(id,'A',a.A.o,a.A.a,sa,d.done)+`<span class="part">Part B</span><p><b>${a.B.q}</b></p>`+mcOpts(id,'B',a.B.o,a.B.a,sb,d.done)+(d.done?fb(d.pts===max,a.w):chk(id,sa.length===a.A.a.length&&sb.length===a.B.a.length))}
+ if(a.type==='dnd'){const pl=d.place||{};const chip=(k)=>{const c=a.chips[k];let cl='dchip'+(a.long?' long':'');if(d.pick===k)cl+=' pick';if(d.done)cl+=pl[k]===c[1]?' right':' wrong';return `<button class="${cl}" data-act="${id}" data-chip="${k}" ${d.done?'disabled':''}>${c[0]}${d.done&&pl[k]!==c[1]?' <span class="noread">→ '+a.bins[c[1]]+'</span>':''}</button>`};
+  const pool=a.chips.map((_,k)=>k).filter(k=>pl[k]===undefined);
+  b=(d.done?'':`<div class="pool" data-act="${id}" data-bin="-1">${pool.map(chip).join('')}</div>`)+`<div class="bins">${a.bins.map((n,bi)=>`<div class="bin ${d.pick!==undefined&&!d.done?'tapme':''}" data-act="${id}" data-bin="${bi}"><b style="background:${a.binC[bi]}">${n}</b><div class="drop">${a.chips.map((_,k)=>k).filter(k=>pl[k]===bi).map(chip).join('')}</div></div>`).join('')}</div>`+(d.done?fb(d.pts===max,d.pts===max?'Everything is in the right bin!':'Red items show where they belong.'):chk(id,pool.length===0))}
+ if(a.type==='hl'){const tk=parseHL(a.text),col=d.col||{},mk=d.mk===undefined?1:d.mk;
+  b=(d.done?'':`<div class="markers noread">${[[1,'💗 1st'],[2,'💙 2nd'],[3,'💚 3rd'],[0,'🧽 Eraser']].map(([m,n])=>`<button class="mk m${m} ${mk===m?'on':''}" data-act="${id}" data-mk="${m}">${n}</button>`).join('')}</div>`)+
+  `<div class="passage hl">${tk.map((t,k)=>{let c='tk';if(col[k])c+=' c'+col[k];if(d.done){if(t.c&&col[k]===t.c)c+=' ok';else if(t.c)c+=' miss'+t.c;else if(col[k])c+=' bad'}return `<button class="${c}" data-act="${id}" data-tk="${k}" ${d.done?'disabled':''}>${t.t}</button>`}).join(' ')}</div>`+
+  (d.done?fb(d.pts===max,d.pts===max?'Every pronoun is colored correctly!':'Dashed outlines show pronouns you missed (in the color they should be). Red shows words that are not pronouns.'):chk(id,Object.keys(col).length>0))}
+ if(a.type==='hot'){const on=d.on||[];b=`<div class="passage">${a.sents.map((s,k)=>{let c='sent';if(on.includes(k))c+=' on';if(d.done){if(a.a.includes(k))c+=on.includes(k)?' right':' miss';else if(on.includes(k))c+=' wrong'}return `<button class="${c}" data-act="${id}" data-sent="${k}" ${d.done?'disabled':''}>${s}</button>`}).join(' ')}</div>`+(d.done?fb(d.pts===max,a.w):chk(id,on.length===a.a.length))}
+ if(a.type==='rhyme'){const lab=d.lab||{},LET=['A','B','C','D'];b=`<div class="poem">${a.lines.map((l,k)=>{const ok=d.done?(lab[k]===a.ans[k]):null;return `<div class="rl ${ok===true?'right':ok===false?'wrong':''}"><span class="rlt">${l}</span><span class="rls noread">${LET.map(x=>`<button class="rb ${lab[k]===x?'on L'+x:''}" data-act="${id}" data-rl="${k}" data-let="${x}" ${d.done?'disabled':''}>${x}</button>`).join('')}${d.done&&!ok?' <b>→ '+a.ans[k]+'</b>':''}</span></div>`}).join('')}</div>`+(d.done?fb(d.pts===maxPts(a),'Rhyme scheme: '+a.ans.join(' ')+'. Lines whose end words rhyme share a letter.'):chk(id,Object.keys(lab).length===a.lines.length))}
+ if(a.type==='grid'){const g=d.g||{};b=`<div class="gridwrap"><table class="grid"><tr><th></th>${a.cols.map(c=>`<th>${c}</th>`).join('')}</tr>${a.rows.map((r,k)=>`<tr class="${d.done?(g[k]===r[1]?'gright':'gwrong'):''}"><td class="gq">${r[0]}</td>${a.cols.map((c,ci)=>`<td class="gc"><button class="gb ${g[k]===ci?'on':''} ${d.done&&r[1]===ci?'ans':''}" aria-label="${c}" data-act="${id}" data-gr="${k}" data-gc="${ci}" ${d.done?'disabled':''}>${g[k]===ci?'✔':''}</button></td>`).join('')}</tr>`).join('')}</table></div>`+(d.done?fb(d.pts===maxPts(a),'Green outlines show the correct column for each row.'):chk(id,Object.keys(g).length===a.rows.length))}
+ if(a.type==='write'){const n=words(d.text);b=(a.starters?`<div class="starters">${a.starters}</div>`:'')+`<textarea data-act="${id}" data-write="1" placeholder="Type, or write with your Apple Pencil here.">${(d.text||'').replace(/</g,'&lt;')}</textarea><span class="wc noread ${n>=MINW?'ok':''}" id="wc-${id}">${n} words ${n>=MINW?'✅ +15 XP':'(write at least '+MINW+' words for +15 XP)'}</span>`}
+ const typeName={grid:'🔲 Table Match',mc:a.a&&a.a.length>1?'☑️ Multiselect':'❓ Multiple Choice',ab:'🅰️🅱️ Evidence-Based',dnd:'✋ Drag & Drop',hl:'🖍️ Hot Text Highlight',rhyme:'🔤 Rhyme Lab',hot:'👆 Hot Text',hot:'👆 Hot Text',write:'✏️ Write'}[a.type];
+ return `<div class="act" id="box-${id}"><span class="tag dok${a.dok}">DOK ${a.dok}</span>${a.spiral?`<span class="tag spiral">🔁 Spiral: ${a.spiral}</span>`:''}<span class="tag noread" style="background:#22304f">${typeName}</span>${a.std?`<span class="tag noread" style="background:#4b1f8f">${a.std}</span>`:''}<span class="pts noread">${a.type==='write'?(isDone(a,id)?'Earned 15 XP':'Up to 15 XP'):d.done?'Earned '+d.pts+' / '+max+' XP':'Up to '+max+' XP'}${a.type==='mc'&&a.a.length>1?' • Select TWO':''}</span><button class="say">🔊 Read</button><h4>${a.title}</h4>${a.show||''}<p>${a.q||''}</p>${b}</div>`}
+
+function grade(a,id){const d=getD(id),max=maxPts(a);let pts=0;const same=(s,t)=>s.length===t.length&&t.every(v=>s.includes(v));
+ if(a.type==='mc')pts=same(d.sel||[],a.a)?max:0;
+ if(a.type==='ab')pts=(same(d.A||[],a.A.a)?10:0)+(same(d.B||[],a.B.a)?10:0);
+ if(a.type==='dnd'){const pl=d.place||{};a.chips.forEach((c,k)=>{if(pl[k]===c[1])pts+=5})}
+ if(a.type==='hl'){const tk=parseHL(a.text),col=d.col||{},tot=tk.filter(t=>t.c).length;let good=0,extra=0;tk.forEach((t,k)=>{if(t.c&&col[k]===t.c)good++;else if(!t.c&&col[k])extra++});pts=Math.max(0,Math.round(max*(good-extra)/tot))}
+ if(a.type==='grid'){const g=d.g||{};a.rows.forEach((r,k)=>{if(g[k]===r[1])pts+=5})}
+ if(a.type==='rhyme'){const lab=d.lab||{};a.ans.forEach((x,k)=>{if(lab[k]===x)pts+=5})}
+ if(a.type==='hot'){const on=d.on||[];const hit=on.filter(k=>a.a.includes(k)).length;pts=Math.round(10*Math.max(0,hit-(on.length-hit))/a.a.length)}
+ d.done=true;d.pick=undefined;d.pts=pts;save();result(pts,max)}
+
+/* ===================== PAGES ===================== */
+function renderMap(){$('#map').innerHTML=LEVELS.map(L=>{const done=lvDone(L);return `<button class="door ${L.cls} ${S.lv===L.id?'active':''}" data-lv="${L.id}"><span class="ic">${done?'🏅':L.icon}</span><b>Level ${L.id}: ${L.name}</b><small>${L.sub}${done?' ✅':' • '+lvCount(L)+'/'+L.acts.length}</small></button>`}).join('')}
+function hud(){const x=xp();$('#xpfill').style.width=Math.min(100,x/MAXXP*100)+'%';$('#xpnum').textContent=x+' / '+MAXXP+' XP';$('#lvl').textContent=title(x);$('#streak').textContent='🔥 '+S.streak;LEVELS.forEach(L=>$('#b'+L.id).classList.toggle('on',lvDone(L)));$('#soundBtn').textContent=S.sound?'🔔 On':'🔕 Off'}
+function lprog(){const el=$('#lprog');if(!el)return;const L=LEVELS[S.lv-1],n=lvCount(L),t=L.acts.length,left=t-n;
+ const msg=left===0?'🏅 Level complete! '+L.badge+' earned!':left===1?'⚡ Just ONE more to earn '+L.badge+'!':n===0?'🚀 Let’s go! '+t+' challenges to earn '+L.badge:n>=t/2?'💪 Past halfway! '+left+' more to go!':'👍 Nice start! '+left+' more to earn '+L.badge;
+ el.innerHTML=`<span>${msg}</span><div class="bar"><span style="width:${n/t*100}%"></span></div><span>${n}/${t}</span>`}
+function stamina(){const el=$('#stam');if(!el)return;const L=LEVELS[3],n=lvCount(L);const msgs=['Charge up your reading stamina! ⚡','Great start. Keep the battery charging!','You’re building real stamina! 🔋','Halfway charged. Don’t stop now! 💪','Almost full. Finish strong! 🏁','FULLY CHARGED! You are a Stamina Champ! 🏆'];
+ el.querySelector('.battery').innerHTML=L.acts.map((_,k)=>`<span class="${k<n?'on':''}"></span>`).join('');el.querySelector('.smsg').textContent=msgs[Math.min(5,Math.floor(n/2))]}
+function render(){stopSpeak();renderMap();hud();const L=LEVELS[S.lv-1],app=$('#app');
+ app.innerHTML=`<section>
+ <div class="lhead" style="background:${L.bg}"><h2>${L.icon} Level ${L.id}: ${L.name}</h2><span class="chip-std noread">${STD}</span>
+ <div class="ican"><b>I can…</b><ul>${L.ican.map(x=>'<li>'+x+'</li>').join('')}</ul></div></div>
+ <div class="lprog noread" id="lprog"></div>
+ ${L.stamina?`<div class="stam" id="stam"><b class="fred" style="font-size:24px">🔋 Stamina Meter</b><div class="battery"></div><div class="smsg" style="font-weight:800"></div><div class="note" style="color:#fff">This round spirals back through ALL levels. Every question charges your battery!</div></div>`:''}
+ ${L.learn.length?`<div class="sect">📚 Learn It</div>`+L.learn.map(c=>`<div class="card"><button class="say">🔊 Read</button><h3>${c.t}</h3>${c.h}</div>`).join(''):''}
+ <div class="sect">⚡ ${L.stamina?'Stamina Rounds':'Practice It'}</div>
+ ${L.acts.map((a,i)=>actHTML(L,a,i)).join('')}
+ ${L.id<4?`<button class="nextbtn" data-lv="${L.id+1}">Level ${L.id+1}: ${LEVELS[L.id].name} →</button>`:finalHTML()}
+ </section>`;lprog();stamina()}
+function finalHTML(){const x=xp(),all=LEVELS.every(lvDone);return `<div class="card trophy" id="finalCard"><span class="big">${all?'🏆':'🎯'}</span><b class="fred" style="font-size:26px">${title(x)}</b><br>${x} of ${MAXXP} XP • Badges: ${LEVELS.filter(lvDone).length}/4 • Best streak: 🔥${S.best}<br><span class="note">${all?'You read three passages and PROVED your answers for a whole class period. That’s monster-sized stamina! 🎃':'Finish every level to collect all 4 badges!'}</span>${all?'<br><button class="tbtn" id="party" style="margin-top:10px">🎉 Celebrate again!</button>':''}</div>
+ <div class="act" id="repCard"><h4 style="padding:0">📄 My Halloween Sprint Report</h4><p class="noread">Make your report, then download or print it and turn it in on Canvas as Mrs. Rees directs.</p><div class="rbtns"><button id="repBtn">📋 Show report</button><button id="dlBtn">⬇️ Download (.txt)</button><button id="prBtn">🖨️ Print / save PDF</button></div><div id="report"></div></div>`}
+
+function report(){const x=xp();let t='HALLOWEEN STAMINA SPRINT • PRACTICE REPORT (Grade 6 ELA Reading)\nStudent: '+(S.name.trim()||'[Name missing]')+'\nDate: '+new Date().toLocaleString()+'\nTime on task: '+Math.floor((S.secs||0)/60)+' min\nXP: '+x+' / '+MAXXP+'  •  '+title(x).replace(/^\S+\s/,'')+'  •  Best streak: '+S.best+'\n';
+ const dk={1:[0,0],2:[0,0],3:[0,0]};
+ LEVELS.forEach(L=>{t+='\n== LEVEL '+L.id+': '+L.name.toUpperCase()+' ==\n';L.acts.forEach((a,i)=>{const id=aid(L.id,i),d=S.d[id]||{},mx=maxPts(a);if(a.type!=='write'){dk[a.dok][1]+=mx;dk[a.dok][0]+=d.done?d.pts:0}
+  t+='  ['+'DOK '+a.dok+'] '+a.title+': '+(a.type==='write'?'\n'+(d.text||'[Missing]'):d.done?d.pts+'/'+mx:'Not done')+'\n'})});
+ t+='\n== SCORE BY DOK LEVEL (auto-scored items) ==\n';[1,2,3].forEach(k=>t+='  DOK '+k+': '+dk[k][0]+'/'+dk[k][1]+(dk[k][1]?' ('+Math.round(dk[k][0]/dk[k][1]*100)+'%)':'')+'\n');
+ t+='  Written responses need teacher review.\n';$('#report').textContent=t;return t}
+
+/* ===================== EVENTS ===================== */
+$('#student').value=S.name;$('#student').oninput=e=>{S.name=e.target.value;save()};
+$('#rate').value=S.rate;$('#rate').oninput=e=>{S.rate=e.target.value;save()};
+$('#stopBtn').onclick=stopSpeak;$('#soundBtn').onclick=()=>{S.sound=!S.sound;save();hud()};
+function findAct(id){const [l,i]=id.slice(1).split('a').map(Number);return {L:LEVELS[l-1],a:LEVELS[l-1].acts[i-1],i:i-1}}
+function rerender(id){const {L,a,i}=findAct(id);$('#box-'+id).outerHTML=actHTML(L,a,i);hud()}
+function place(id,k,bin){const d=getD(id);d.place=d.place||{};if(bin<0)delete d.place[k];else d.place[k]=bin;d.pick=undefined;save();tone([620]);rerender(id)}
+
+/* Drag and drop with finger, Apple Pencil, or mouse (pointer events) */
+let drag=null,suppress=false;
+document.addEventListener('pointerdown',e=>{const c=e.target.closest('.dchip');if(!c||c.disabled)return;drag={c,id:c.dataset.act,k:+c.dataset.chip,x:e.clientX,y:e.clientY,moved:false,g:null}});
+document.addEventListener('pointermove',e=>{if(!drag)return;if(!drag.moved&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>8){drag.moved=true;const r=drag.c.getBoundingClientRect();const g=drag.c.cloneNode(true);g.classList.add('ghost');g.style.width=r.width+'px';drag.ox=e.clientX-r.left;drag.oy=e.clientY-r.top;document.body.appendChild(g);drag.g=g;drag.c.style.opacity=.3}
+ if(drag.moved){e.preventDefault();drag.g.style.left=(e.clientX-drag.ox)+'px';drag.g.style.top=(e.clientY-drag.oy)+'px';document.querySelectorAll('.bin.over').forEach(b=>b.classList.remove('over'));const t=document.elementFromPoint(e.clientX,e.clientY);const b=t&&t.closest('.bin');if(b&&b.dataset.act===drag.id)b.classList.add('over')}},{passive:false});
+document.addEventListener('pointerup',e=>{if(!drag)return;const D=drag;drag=null;if(!D.moved)return;suppress=true;setTimeout(()=>suppress=false,50);D.g.remove();D.c.style.opacity='';document.querySelectorAll('.bin.over').forEach(b=>b.classList.remove('over'));const t=document.elementFromPoint(e.clientX,e.clientY);const z=t&&t.closest('[data-bin]');if(z&&z.dataset.act===D.id)place(D.id,D.k,+z.dataset.bin)});
+document.addEventListener('pointercancel',()=>{if(drag&&drag.g){drag.g.remove();drag.c.style.opacity=''}drag=null});
+
+document.addEventListener('click',e=>{if(suppress)return;const b=e.target.closest('button');
+ const zone=e.target.closest('[data-bin]');
+ if(zone&&!e.target.closest('.dchip')){const id=zone.dataset.act,d=getD(id);if(!d.done&&d.pick!==undefined){place(id,d.pick,+zone.dataset.bin);return}}
+ if(!b)return;
+ if(b.dataset.lv){S.lv=+b.dataset.lv;save();render();window.scrollTo({top:$('#map').offsetTop-70,behavior:'smooth'});return}
+ if(b.classList.contains('say')){const box=b.closest('.act,.card');speak(textOf(box),box);return}
+ if(b.dataset.demo){const n=b.dataset.demo,dm=$('#demo');dm.classList.toggle('s'+n);b.classList.toggle('on'+n);tone([500+n*80]);return}
+ if(b.dataset.check){const {a}=findAct(b.dataset.check);grade(a,b.dataset.check);rerender(b.dataset.check);return}
+ if(b.id==='party'){confetti(180);tone([523,659,784,1047,1319]);toast('🎃 You’re a Monster Reader!');return}
+ const id=b.dataset.act;
+ if(id){const {a}=findAct(id),d=getD(id);if(d.done)return;
+  if(b.dataset.mc!==undefined){const j=+b.dataset.mc,part=b.dataset.part,need=(part==='A'?a.A.a:part==='B'?a.B.a:a.a).length,key=part==='x'?'sel':part;let s=d[key]||[];if(need>1)s=s.includes(j)?s.filter(v=>v!==j):(s.length<need?[...s,j]:s);else s=[j];d[key]=s;tone([560])}
+  else if(b.dataset.chip!==undefined){const k=+b.dataset.chip,z=b.closest('.bin');if(d.pick!==undefined&&d.pick!==k&&z){place(id,d.pick,+z.dataset.bin);return}d.pick=d.pick===k?undefined:k;tone([500])}
+  else if(b.dataset.mk!==undefined){d.mk=+b.dataset.mk}
+  else if(b.dataset.tk!==undefined){const k=+b.dataset.tk,mk=d.mk===undefined?1:d.mk;d.col=d.col||{};if(mk===0||d.col[k]===mk)delete d.col[k];else d.col[k]=mk;tone([480+mk*90])}
+  else if(b.dataset.gr!==undefined){d.g=d.g||{};d.g[b.dataset.gr]=+b.dataset.gc;tone([560])}
+  else if(b.dataset.rl!==undefined){d.lab=d.lab||{};d.lab[b.dataset.rl]=b.dataset.let;tone([520+'ABCD'.indexOf(b.dataset.let)*90])}
+  else if(b.dataset.sent!==undefined){const k=+b.dataset.sent;let on=d.on||[];if(a.a.length===1)on=on.includes(k)?[]:[k];else on=on.includes(k)?on.filter(v=>v!==k):(on.length<a.a.length?[...on,k]:on);d.on=on;tone([580])}
+  save();rerender(id);return}
+ if(b.id==='repBtn'){report();return}
+ if(b.id==='dlBtn'){const t=report(),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain'}));a.download='Halloween-Stamina-Sprint-'+(S.name.trim().replace(/\s+/g,'-')||'Report')+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);return}
+ if(b.id==='prBtn'){report();window.print();return}
+});
+let wt;document.addEventListener('input',e=>{const ta=e.target.closest('textarea[data-write]');if(!ta)return;const id=ta.dataset.act,d=getD(id);d.text=ta.value;save();const n=words(ta.value),wc=$('#wc-'+id);wc.textContent=n+' words '+(n>=MINW?'✅ +15 XP':'(write at least '+MINW+' words for +15 XP)');wc.classList.toggle('ok',n>=MINW);clearTimeout(wt);wt=setTimeout(afterProgress,600)});
+let ptab=1;function openDrawer(n){ptab=n||ptab;$('#dbody').innerHTML=PASSAGES[ptab];document.querySelectorAll('[data-ptab]').forEach(b=>b.classList.toggle('on',+b.dataset.ptab===ptab));$('#drawer').classList.add('open');$('#drawer').setAttribute('aria-hidden','false')}
+$('#pbtn').onclick=()=>openDrawer(LEVELS[S.lv-1].passage||1);$('#dclose').onclick=()=>{$('#drawer').classList.remove('open');stopSpeak()};
+document.querySelectorAll('[data-ptab]').forEach(b=>b.onclick=e=>{e.stopPropagation();openDrawer(+b.dataset.ptab)});
+$('#dsay').onclick=e=>{e.stopPropagation();speak(textOf($('#dbody')),$('#dbody'))};
+S.secs=S.secs||0;function clock(){const m=Math.floor(S.secs/60),sec=S.secs%60;$('#clock').textContent='⏱ '+m+':'+String(sec).padStart(2,'0')}
+setInterval(()=>{if(!document.hidden){S.secs++;clock();if(S.secs%15===0)save()}},1000);clock();
+render();
+</script>
+</body>
+</html>
